@@ -1,70 +1,45 @@
 //
-//  MFDoorwayTransition.m
+//  BSBDoorwaySegue.m
+//  DoorwayTransition
 //
-// Copyright (c) 2011 Ken Matsui (https://github.com/mkftr)
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this 
-// software and associated documentation files (the "Software"), to deal in the Software 
-// without restriction, including without limitation the rights to use, copy, modify, 
-// merge, publish, distribute, sublicense, and/or sell copies of the Software, and to 
-// permit persons to whom the Software is furnished to do so, subject to the following 
-// conditions:
+//  Created by Benjamin Schuster-Boeckler on 08/02/2014.
 //
-// The above copyright notice and this permission notice shall be included in all copies 
-// or substantial portions of the Software.
 //
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
-// PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
-// HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
-// OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
-#import "MFDoorwayTransition.h"
+#import "BSBDoorwaySegue.h"
 #import <QuartzCore/QuartzCore.h>
+
 
 CGFloat degreeToRadian(CGFloat degree)
 {
     return degree * M_PI / 180.0f;
 }
 
-@interface MFDoorwayTransition ()
-@property (nonatomic, retain) CALayer *doorLayerLeft;
-@property (nonatomic, retain) CALayer *doorLayerRight;
-@property (nonatomic, retain) CALayer *nextViewLayer;
+@interface BSBDoorwaySegue ()
+@property (nonatomic, strong) CALayer *doorLayerLeft;
+@property (nonatomic, strong) CALayer *doorLayerRight;
+@property (nonatomic, strong) CALayer *nextViewLayer;
+@property (nonatomic, strong) UIView *view;
+@property (nonatomic, strong) UIView *nextView;
+
 - (CAAnimation *)openDoorAnimationWithRotationDegree:(CGFloat)degree;
 - (CAAnimation *)zoomInAnimation;
 @end
 
+@implementation BSBDoorwaySegue
 
-@implementation MFDoorwayTransition
-
-@synthesize doorLayerLeft, doorLayerRight, nextViewLayer;
-@synthesize view, originalView, nextView;
-
-- (id)initWithBaseView:(UIView *)baseView firstView:(UIView *)firstView lastView:(UIView *)lastView
+- (id)initWithIdentifier:(NSString *)identifier source:(UIViewController *)source destination:(UIViewController *)destination
 {
-    if((self = [super init])) {
-        self.view = baseView;
-        self.originalView = firstView;
-        self.nextView = lastView;
+    if (self = [super initWithIdentifier:identifier source:source destination:destination])
+    {
+        self.view = source.view;
+        self.nextView=destination.view;
     }
+    
     return self;
 }
 
-- (void)dealloc
-{
-    self.doorLayerLeft = nil;
-    self.doorLayerRight = nil;
-    self.nextViewLayer = nil;
-    self.view = nil;
-    self.originalView = nil;
-    self.nextView = nil;
-    [super dealloc];
-}
-
-- (void)buildAnimation
+- (void)perform
 {
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
     CGRect leftDoorRect = CGRectMake(0.0f, 0.0f, screenSize.width / 2.0f, screenSize.height);
@@ -94,17 +69,17 @@ CGFloat degreeToRadian(CGFloat degree)
     self.nextViewLayer.transform = nextViewTransform;
     
     // Left door image
-    self.doorLayerLeft.contents = (id)[MFDoorwayTransition clipImageFromLayer:self.originalView.layer size:leftDoorRect.size offsetX:0.0f];
+    self.doorLayerLeft.contents = (id)[[self class] clipImageFromLayer:self.view.layer size:leftDoorRect.size offsetX:0.0f];
     
     // Right door image
-    self.doorLayerRight.contents = (id)[MFDoorwayTransition clipImageFromLayer:self.view.layer size:rightDoorRect.size offsetX:-leftDoorRect.size.width];
+    self.doorLayerRight.contents = (id)[[self class] clipImageFromLayer:self.view.layer size:rightDoorRect.size offsetX:-leftDoorRect.size.width];
     
     // Next view image
-    self.nextViewLayer.contents = (id)[MFDoorwayTransition clipImageFromLayer:self.nextView.layer size:screenSize offsetX:0.0f];
+    self.nextViewLayer.contents = (id)[[self class] clipImageFromLayer:self.nextView.layer size:screenSize offsetX:0.0f];
     
-    [self.view.layer addSublayer:self.doorLayerLeft];
-    [self.view.layer addSublayer:self.doorLayerRight];
-    [self.view.layer addSublayer:self.nextViewLayer];
+    [self.view.superview.layer addSublayer:self.doorLayerLeft];
+    [self.view.superview.layer addSublayer:self.doorLayerRight];
+    [self.view.superview.layer addSublayer:self.nextViewLayer];
     
     CAAnimation *leftDoorAnimation = [self openDoorAnimationWithRotationDegree:90.0f];
     leftDoorAnimation.delegate = self;
@@ -117,8 +92,7 @@ CGFloat degreeToRadian(CGFloat degree)
     CAAnimation *nextViewAnimation = [self zoomInAnimation];
     nextViewAnimation.delegate = self;
     [self.nextViewLayer addAnimation:nextViewAnimation forKey:@"NextViewAnimationStarted"];
-    
-    [self.originalView removeFromSuperview];
+    [self.view removeFromSuperview];
 }
 
 //------------------------------------------------------------------------------
@@ -132,16 +106,17 @@ CGFloat degreeToRadian(CGFloat degree)
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
     if(flag) {
-        if([self.doorLayerLeft animationForKey:@"doorAnimationStarted"] == anim ||
-           [self.doorLayerRight animationForKey:@"doorAnimationStarted"] == anim)
-        {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
             [self.doorLayerLeft removeFromSuperlayer];
             [self.doorLayerRight removeFromSuperlayer];
-        }
-        else 
-        {
-            [self.view addSubview:self.nextView];
-        }
+            [self.nextView removeFromSuperview];
+            [(UIViewController *)self.sourceViewController presentViewController:self.destinationViewController
+                                                                        animated:NO
+                                                                      completion:^{
+                                                                          
+                                                                      }];
+        });
     }
 }
 
@@ -168,7 +143,7 @@ CGFloat degreeToRadian(CGFloat degree)
     
     CABasicAnimation *zoomInAnim = [CABasicAnimation animationWithKeyPath:@"transform.translation.z"];
     zoomInAnim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-    zoomInAnim.fromValue = [NSNumber numberWithFloat:-1000.0f];
+    zoomInAnim.fromValue = [NSNumber numberWithFloat:-500.0f];
     zoomInAnim.toValue = [NSNumber numberWithFloat:0.0f];
     
     CABasicAnimation *fadeInAnim = [CABasicAnimation animationWithKeyPath:@"opacity"];
@@ -177,7 +152,7 @@ CGFloat degreeToRadian(CGFloat degree)
     fadeInAnim.toValue = [NSNumber numberWithFloat:1.0f];
     
     animGroup.animations = [NSArray arrayWithObjects:zoomInAnim, fadeInAnim, nil];
-    animGroup.duration = 1.5f;
+    animGroup.duration = 0.5f;
     
     return animGroup;
 }
@@ -197,8 +172,9 @@ CGFloat degreeToRadian(CGFloat degree)
     zoomInAnim.toValue = [NSNumber numberWithFloat:300.0f];
     
     animGroup.animations = [NSArray arrayWithObjects:openAnim, zoomInAnim, nil];
-    animGroup.duration = 1.5f;
+    animGroup.duration = 0.5f;
     
     return animGroup;
 }
+
 @end

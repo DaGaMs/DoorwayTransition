@@ -26,9 +26,4 @@
 
 @interface ViewController : UIViewController
 
-@property (nonatomic, retain) IBOutlet UIView *currentView;
-@property (nonatomic, retain) IBOutlet UIView *nextView;
-
-- (IBAction)clickOpenDoor:(id)sender;
-
 @end

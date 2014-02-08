@@ -22,11 +22,8 @@
 
 
 #import "ViewController.h"
-#import "MFDoorwayTransition.h"
 
 @implementation ViewController
-
-@synthesize currentView, nextView;
 
 - (void)didReceiveMemoryWarning
 {
@@ -34,12 +31,6 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (void)dealloc 
-{
-    self.currentView = nil;
-    self.nextView = nil;
-    [super dealloc];
-}
 
 #pragma mark - View lifecycle
 
@@ -86,13 +77,9 @@
     }
 }
 
-- (IBAction)clickOpenDoor:(id)sender
+- (IBAction)unwind:(UIStoryboardSegue *)segue
 {
-    MFDoorwayTransition *transition = [[MFDoorwayTransition alloc] initWithBaseView:self.view 
-                                                                          firstView:self.currentView 
-                                                                           lastView:self.nextView];
-    [transition buildAnimation];
-    [transition release];
+    NSLog(@"Unwind from modal view");
 }
 
 @end

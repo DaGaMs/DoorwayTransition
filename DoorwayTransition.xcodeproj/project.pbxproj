@@ -14,11 +14,11 @@
 		BEF62174145BE2F700F181E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF62173145BE2F700F181E9 /* main.m */; };
 		BEF62178145BE2F700F181E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF62177145BE2F700F181E9 /* AppDelegate.m */; };
 		BEF6217B145BE2F700F181E9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF6217A145BE2F700F181E9 /* ViewController.m */; };
-		BEF6217E145BE2F700F181E9 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF6217C145BE2F700F181E9 /* ViewController_iPhone.xib */; };
-		BEF62181145BE2F700F181E9 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF6217F145BE2F700F181E9 /* ViewController_iPad.xib */; };
 		BEF62188145BE65C00F181E9 /* DoorPicture.png in Resources */ = {isa = PBXBuildFile; fileRef = BEF62187145BE65C00F181E9 /* DoorPicture.png */; };
 		BEF6218B145BE85700F181E9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF62189145BE84E00F181E9 /* QuartzCore.framework */; };
-		BEF6218E145D593400F181E9 /* MFDoorwayTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF6218D145D593400F181E9 /* MFDoorwayTransition.m */; };
+		CA0A5A0718A6D695007F6AE6 /* BSBDoorwaySegue.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0A5A0618A6D695007F6AE6 /* BSBDoorwaySegue.m */; };
+		CA0A5A0918A6D8EA007F6AE6 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA0A5A0818A6D8EA007F6AE6 /* Storyboard.storyboard */; };
+		CA0A5A0C18A6DEC2007F6AE6 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0A5A0B18A6DEC2007F6AE6 /* SecondViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,12 +34,13 @@
 		BEF62177145BE2F700F181E9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		BEF62179145BE2F700F181E9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		BEF6217A145BE2F700F181E9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		BEF6217D145BE2F700F181E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
-		BEF62180145BE2F700F181E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
 		BEF62187145BE65C00F181E9 /* DoorPicture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DoorPicture.png; sourceTree = "<group>"; };
 		BEF62189145BE84E00F181E9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		BEF6218C145D593400F181E9 /* MFDoorwayTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFDoorwayTransition.h; sourceTree = "<group>"; };
-		BEF6218D145D593400F181E9 /* MFDoorwayTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFDoorwayTransition.m; sourceTree = "<group>"; };
+		CA0A5A0518A6D695007F6AE6 /* BSBDoorwaySegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSBDoorwaySegue.h; sourceTree = "<group>"; };
+		CA0A5A0618A6D695007F6AE6 /* BSBDoorwaySegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSBDoorwaySegue.m; sourceTree = "<group>"; };
+		CA0A5A0818A6D8EA007F6AE6 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		CA0A5A0A18A6DEC2007F6AE6 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		CA0A5A0B18A6DEC2007F6AE6 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,11 +93,12 @@
 				BEF62177145BE2F700F181E9 /* AppDelegate.m */,
 				BEF62179145BE2F700F181E9 /* ViewController.h */,
 				BEF6217A145BE2F700F181E9 /* ViewController.m */,
-				BEF6217C145BE2F700F181E9 /* ViewController_iPhone.xib */,
-				BEF6217F145BE2F700F181E9 /* ViewController_iPad.xib */,
+				CA0A5A0818A6D8EA007F6AE6 /* Storyboard.storyboard */,
 				BEF6216E145BE2F700F181E9 /* Supporting Files */,
-				BEF6218C145D593400F181E9 /* MFDoorwayTransition.h */,
-				BEF6218D145D593400F181E9 /* MFDoorwayTransition.m */,
+				CA0A5A0518A6D695007F6AE6 /* BSBDoorwaySegue.h */,
+				CA0A5A0618A6D695007F6AE6 /* BSBDoorwaySegue.m */,
+				CA0A5A0A18A6DEC2007F6AE6 /* SecondViewController.h */,
+				CA0A5A0B18A6DEC2007F6AE6 /* SecondViewController.m */,
 			);
 			path = DoorwayTransition;
 			sourceTree = "<group>";
@@ -164,9 +166,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEF62172145BE2F700F181E9 /* InfoPlist.strings in Resources */,
-				BEF6217E145BE2F700F181E9 /* ViewController_iPhone.xib in Resources */,
-				BEF62181145BE2F700F181E9 /* ViewController_iPad.xib in Resources */,
 				BEF62188145BE65C00F181E9 /* DoorPicture.png in Resources */,
+				CA0A5A0918A6D8EA007F6AE6 /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,10 +178,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA0A5A0C18A6DEC2007F6AE6 /* SecondViewController.m in Sources */,
 				BEF62174145BE2F700F181E9 /* main.m in Sources */,
+				CA0A5A0718A6D695007F6AE6 /* BSBDoorwaySegue.m in Sources */,
 				BEF62178145BE2F700F181E9 /* AppDelegate.m in Sources */,
 				BEF6217B145BE2F700F181E9 /* ViewController.m in Sources */,
-				BEF6218E145D593400F181E9 /* MFDoorwayTransition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,22 +195,6 @@
 				BEF62171145BE2F700F181E9 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		BEF6217C145BE2F700F181E9 /* ViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BEF6217D145BE2F700F181E9 /* en */,
-			);
-			name = ViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		BEF6217F145BE2F700F181E9 /* ViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BEF62180145BE2F700F181E9 /* en */,
-			);
-			name = ViewController_iPad.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -262,10 +248,13 @@
 		BEF62185145BE2F700F181E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DoorwayTransition/DoorwayTransition-Prefix.pch";
 				INFOPLIST_FILE = "DoorwayTransition/DoorwayTransition-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -273,10 +262,13 @@
 		BEF62186145BE2F700F181E9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DoorwayTransition/DoorwayTransition-Prefix.pch";
 				INFOPLIST_FILE = "DoorwayTransition/DoorwayTransition-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -300,6 +292,7 @@
 				BEF62186145BE2F700F181E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
